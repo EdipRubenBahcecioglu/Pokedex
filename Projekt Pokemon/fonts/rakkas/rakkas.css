@@ -1,0 +1,13 @@
+/* rakkas-regular - latin */
+@font-face {
+    font-family: 'Rakkas';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/rakkas-v17-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local(''),
+         url('./rakkas-v17-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('./rakkas-v17-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('./rakkas-v17-latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('./rakkas-v17-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('./rakkas-v17-latin-regular.svg#Rakkas') format('svg'); /* Legacy iOS */
+  }

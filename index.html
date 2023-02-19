@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API-First</title>
+
+    <script>
+        async function getSynonyms() { // a Syncrone Funktionen sind Funktionen, worauf man auf etwas warten muss, bevor die nächste Funktion ausgeführt wird 
+            let query = document.getElementById('searchQuery').value; // Die URL in Zeile 13 wird mit dem Wort ausgefüllt, die der User in Zeile 58 reinschreibt
+            let url = `https://www.openthesaurus.de/synonyme/search?q=${query}&format=application/json`; // Unter der Variable ist die URL des API Servers gespeichert / Query ist hier eine Variable, da der User nicht immer nach einem Wort sucht und der Link immer gleich ist, sondern nach mehrern Wörtern, dementsprechend wird der Link angepasst
+            let response = await fetch(url); // response = Antowrt vom Sesrver, wir warten mithilfe von await fetch auf den Download der Daten die auf dem Server der URL liegen // Immer wenn man als Serverantwort (response) ein "Promise" bekommt, muss ein await davor
+            let responseAsJson = await response.json(); // Serverantwort (response) umgewandelt in ein JSON ist in einer separaten Variable festgehalten
+            let synsets = responseAsJson.synsets
+            renderSynsets(synsets);
+        }
+
+        function renderSynsets(synsets) {
+            let display = document.getElementById('container'); // Outputbereich 
+
+            display.innerHTML = `<div>Es wurden <b> ${synsets.length} </b> Synonom-Sets geladen.</div>`;
+
+            for (let i = 0; i < synsets.length; i++) {
+                const synset = synsets[i];
+                let terms = synset.terms; // Ist ein Array
+                display.innerHTML += `<h2>Synonym-Set mit ID ${synset.id}</h2>`;
+
+                for (let t = 0; t < terms.length; t++) {
+                    const term = terms[t];
+                    display.innerHTML += `<div>${term.term}</div>`;
+                }
+            }
+        }
+        // ####ALLGEIME INFO##### "Status" Nummern in der Konsole beginnent mit 2 = Alles ok; 3 = wir wurden auf einen anderen Server weitergeleitet auch alles Ok, 4 = Fehler vom Nutzer, 5 = Fehler vom Server
+    </script>
+
+    <style>
+        body {
+            margin: 0px;
+        }
+
+        .container {
+            padding: 12px;
+            height: auto;
+            background-color: lightgray;
+        }
+    </style>
+</head>
+
+
+<body>
+    <input required placeholder="Gib ein Wort ein..." type="text" id="searchQuery"></input>
+    <button onclick="getSynonyms()">Get Synonyms</button>
+    <div class="container" id="container"></div>
+</body>
+
+
+</html>

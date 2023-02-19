@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex-API</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="fonts/rakkas/rakkas.css">
+    <link rel="stylesheet" href="fonts/actor/actor.css">
+    <link rel="icon" type="image/x-icon" href="img/favicon.png">
+</head>
+
+<body onload="loadAllPokemons()">
+    <header class="d-center"><h1>POKEDEX</h1></header>
+    <div class="d-center"><input onkeyup="filterPokemon()" type="text" id="search-field" class="search-field" placeholder="Search Pokemon"></div>
+    <div id="pokemons-output-container" class="pokemons-output-container"></div>
+
+</body>
+
+</html>
